@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "video-to-text-extension",
+  "description": "A chrome extension boilerplate built with React 17, Webpack 5, and Webpack Dev Server 4",
+  "options_page": "options.html",
+  "background": { "service_worker": "background.bundle.js" },
+  "permissions": ["cookies", "activeTab", "storage", "alarms"],
+  "host_permissions": [ "<all_urls>"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon-34.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "icons": {
+    "128": "icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "https://*/*", "<all_urls>"],
+      "js": ["contentScript.bundle.js"],
+      "css": ["content.styles.css"]
+    },
+    {
+      "matches": ["https://www.youtube.com//*"],
+      "js": ["contentScript.bundle.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "devtools_page": "devtools.html",
+  "web_accessible_resources": [
+    {
+      "resources": ["content.styles.css", "icon-128.png", "icon-34.png"],
+      "matches": []
+    }
+  ]
+}
