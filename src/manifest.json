@@ -5,7 +5,7 @@
   "options_page": "options.html",
   "background": { "service_worker": "background.bundle.js" },
   "permissions": ["cookies", "activeTab", "storage", "alarms"],
-  "host_permissions": [ "<all_urls>"],
+  "host_permissions": [ "https://www.youtube.com/*"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": "icon-34.png"
@@ -21,21 +21,17 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://*/*", "https://*/*", "<all_urls>"],
-      "js": ["contentScript.bundle.js"],
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["contentScript.bundle.js","youtubeButton.bundle.js"],
       "css": ["content.styles.css"]
-    },
-    {
-      "matches": ["https://www.youtube.com//*"],
-      "js": ["contentScript.bundle.js"],
-      "run_at": "document_end"
     }
+
   ],
   "devtools_page": "devtools.html",
   "web_accessible_resources": [
     {
-      "resources": ["content.styles.css", "icon-128.png", "icon-34.png"],
-      "matches": []
+      "resources": ["content.styles.css", "icon-128.png", "icon-34.png","youtubeButton.html"],
+      "matches": ["https://www.youtube.com/*"]
     }
   ]
 }
